@@ -3,18 +3,28 @@ import { drawStatics } from "../renderers/statics.js";
 import { drawKinematics } from "../renderers/kinematics.js";
 import { drawStructures } from "../renderers/structures.js";
 
+/*
+  DOMAIN NORMALIZATION:
+  OmniEngine sends simplified domains.
+  Visuals adapts them here.
+*/
+
 export const REGISTRY = {
-  "vectors:magnitude": drawVectors,
+  /* ===== VECTORS ===== */
   "vectors:add-2d": drawVectors,
+  "vectors:magnitude": drawVectors,
   "vectors:direction": drawVectors,
   "vectors:resolve": drawVectors,
 
-  "statics_particles:resultant-concurrent": drawStatics,
-  "statics_particles:lami": drawStatics,
+  /* ===== STATICS ===== */
+  "statics:resultant-concurrent": drawStatics,
+  "statics:lami": drawStatics,
   "friction:block-inclined": drawStatics,
 
-  "kinematics_particles:projectile": drawKinematics,
-  "kinematics_particles:rectilinear": drawKinematics,
+  /* ===== KINEMATICS ===== */
+  "kinematics:projectile": drawKinematics,
+  "kinematics:rectilinear": drawKinematics,
 
+  /* ===== STRUCTURES ===== */
   "structures:beam": drawStructures
 };
