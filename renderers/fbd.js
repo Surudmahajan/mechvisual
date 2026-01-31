@@ -1,24 +1,41 @@
 export function drawFBD(stage, layer, data) {
-  const cx = stage.width()/2;
-  const cy = stage.height()/2;
+  const cx = stage.width() / 2;
+  const cy = stage.height() / 2;
 
   const block = new Konva.Rect({
-    x: cx-40, y: cy-40, width: 80, height: 80,
-    fill: "#1e293b", stroke: "#e5e7eb", strokeWidth: 2
+    x: cx - 40,
+    y: cy - 40,
+    width: 80,
+    height: 80,
+    fill: "#1e293b",
+    stroke: "#e5e7eb",
+    strokeWidth: 2
   });
   layer.add(block);
 
-  let forces = data.forces || [];
-  if (data.solution?.Rx) {
-    forces.push({label:"R", fx:data.solution.Rx, fy:data.solution.Ry});
+  const sol = data.solution || {};
+
+  if (sol.normal) {
+    layer.add(new Konva.Arrow({
+      points: [cx, cy, cx, cy - 100],
+      fill: "#22d3ee",
+      stroke: "#22d3ee"
+    }));
   }
 
-  forces.forEach(f=>{
-    const scale=3;
+  if (sol.friction) {
     layer.add(new Konva.Arrow({
-      points:[cx,cy,cx+f.fx*scale,cy-f.fy*scale],
-      pointerLength:10,pointerWidth:10,
-      fill:"#38bdf8",stroke:"#38bdf8",strokeWidth:2
+      points: [cx, cy, cx - 100, cy],
+      fill: "#f59e0b",
+      stroke: "#f59e0b"
     }));
-  });
+  }
+
+  if (sol.downslope_force) {
+    layer.add(new Konva.Arrow({
+      points: [cx, cy, cx + 80, cy + 80],
+      fill: "#ef4444",
+      stroke: "#ef4444"
+    }));
+  }
 }
