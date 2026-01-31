@@ -1,15 +1,24 @@
 export function drawBeam(stage, layer, data) {
-  const y = stage.height()/2;
-  layer.add(new Konva.Line({
-    points:[100,y,stage.width()-100,y],
-    stroke:"#e5e7eb",strokeWidth:6
-  }));
+  if (!Array.isArray(data.x) || !Array.isArray(data.y)) return;
 
-  (data.loads||[]).forEach(l=>{
-    layer.add(new Konva.Arrow({
-      points:[100+l.x*60,y-80,100+l.x*60,y],
-      pointerLength:10,pointerWidth:10,
-      fill:"#ef4444",stroke:"#ef4444",strokeWidth:2
-    }));
+  const w = stage.width();
+  const h = stage.height();
+
+  const maxX = Math.max(...data.x);
+  const maxY = Math.max(...data.y.map(Math.abs));
+
+  const scaleX = (w - 100) / maxX;
+  const scaleY = 100 / maxY;
+
+  const points = [];
+  data.x.forEach((xi, i) => {
+    points.push(50 + xi * scaleX, h / 2 - data.y[i] * scaleY);
   });
+
+  layer.add(new Konva.Line({
+    points,
+    stroke: data.type === "sfd" ? "#22d3ee" : "#f472b6",
+    strokeWidth: 3,
+    tension: 0.2
+  }));
 }
