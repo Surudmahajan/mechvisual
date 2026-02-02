@@ -1,4 +1,6 @@
+import { drawAxes } from "./axes.js";
 export function drawVectors(stage, layer, data) {
+  drawAxes(stage, layer);
   const cx = stage.width() / 2;
   const cy = stage.height() / 2;
 
