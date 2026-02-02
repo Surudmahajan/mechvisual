@@ -1,4 +1,6 @@
+import { drawAxes } from "./axes.js";
 export function drawTruss(stage, layer, data) {
+  drawAxes(stage, layer);
   const joints = data.joints || [];
   const members = data.members || [];
 
