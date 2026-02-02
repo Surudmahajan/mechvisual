@@ -1,4 +1,7 @@
+import { drawAxes } from "./axes.js";
+
 export function drawBeam(stage, layer, data) {
+  drawAxes(stage, layer, { originX: 50, originY: stage.height() / 2 });
   if (!Array.isArray(data.x) || !Array.isArray(data.y)) return;
 
   const w = stage.width();
