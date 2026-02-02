@@ -1,4 +1,6 @@
+import { drawAxes } from "./axes.js";
 export function drawPulley(stage, layer) {
+  drawAxes(stage, layer);
   const cx = stage.width() / 2;
   const cy = 200;
 
