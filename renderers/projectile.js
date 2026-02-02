@@ -1,4 +1,6 @@
+import { drawAxes } from "./axes.js";
 export function drawProjectile(stage, layer, data) {
+  drawAxes(stage, layer, { originX: 50, originY: stage.height() - 50 });
   if (!Array.isArray(data.x) || !Array.isArray(data.y)) return;
 
   const pts = [];
